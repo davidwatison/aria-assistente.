@@ -2,112 +2,724 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARIA — Assistente Virtual</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: #080b16;
-      color: #eaf7ff;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARIA — Inteligência Artificial</title>
 
-    h1 {
-      color: #5ee7ff;
-      font-size: 3rem;
-    }
+<style>
+:root {
+  --bg: #09090b;
+  --panel: #111113;
+  --border: #29292e;
+  --text: #f5f5f5;
+  --muted: #a1a1aa;
+  --accent: #ffffff;
+}
 
-    .orb {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, white, #5ee7ff, #7149bd, #11172a);
-      box-shadow: 0 0 45px #5ee7ff80;
-      animation: flutuar 3s infinite ease-in-out;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    button {
-      margin: 8px;
-      padding: 12px 18px;
-      border: 0;
-      border-radius: 10px;
-      background: #5ee7ff;
-      color: #080b16;
-      font-weight: bold;
-      cursor: pointer;
-    }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  min-height: 100vh;
+}
 
-    input {
-      width: min(300px, 90%);
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #5ee7ff;
-      background: #11172a;
-      color: white;
-    }
+button, input {
+  font: inherit;
+}
 
-    #resposta {
-      max-width: 500px;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
-    }
+button {
+  cursor: pointer;
+  transition: background .2s, border-color .2s,
+    transform .2s, opacity .2s;
+}
 
-    @keyframes flutuar {
-      50% { transform: translateY(-10px); }
-    }
-  </style>
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr);
+}
+
+/* MENU LATERAL */
+
+.sidebar {
+  background: #0d0d0f;
+  border-right: 1px solid var(--border);
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 4px 8px 18px;
+}
+
+.logo {
+  width: 37px;
+  height: 37px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 22px;
+  background: linear-gradient(140deg, #6366f1, #a855f7);
+  box-shadow: 0 0 25px #8b5cf633;
+}
+
+.brand strong {
+  font-size: 18px;
+  letter-spacing: 1.8px;
+}
+
+.new-chat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: #f4f4f5;
+  color: #111113;
+  border: none;
+  border-radius: 12px;
+  padding: 13px 14px;
+  font-weight: 650;
+}
+
+.new-chat:hover {
+  background: #dcdce0;
+  transform: translateY(-1px);
+}
+
+.menu-label {
+  color: #71717a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 0 10px;
+  margin-bottom: 8px;
+}
+
+.nav-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 11px;
+  margin: 3px 0;
+  color: #c4c4cc;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 13px;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  background: #1b1b20;
+  border-color: #303036;
+  color: white;
+}
+
+.nav-icon {
+  font-size: 17px;
+  width: 22px;
+  text-align: center;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 14px 10px;
+  border-top: 1px solid var(--border);
+}
+
+.profile {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #26262d;
+}
+
+.profile small {
+  display: block;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* CONTEÚDO */
+
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 26px;
+  border-bottom: 1px solid #202024;
+}
+
+.page-title {
+  font-size: 14px;
+  color: #e4e4e7;
+}
+
+.status {
+  color: #a1a1aa;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a78bfa;
+  box-shadow: 0 0 12px #a78bfa80;
+}
+
+.content {
+  width: min(800px, 100%);
+  padding: 50px 24px 20px;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.welcome {
+  text-align: center;
+  margin: 20px 0 35px;
+}
+
+.orb {
+  width: 66px;
+  height: 66px;
+  margin: 0 auto 24px;
+  border-radius: 23px;
+  display: grid;
+  place-items: center;
+  font-size: 31px;
+  background: linear-gradient(145deg, #28283b, #15151b);
+  border: 1px solid #45455d;
+  box-shadow: 0 0 40px #8b5cf61c;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-5px); }
+}
+
+.welcome h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  letter-spacing: -1.3px;
+  margin: 0 0 12px;
+}
+
+.gradient {
+  background: linear-gradient(90deg, #c4b5fd, #f5f5f5, #93c5fd);
+  color: transparent;
+  background-clip: text;
+}
+
+.welcome p {
+  max-width: 470px;
+  margin: auto;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* SUGESTÕES */
+
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+  margin-bottom: 27px;
+}
+
+.suggestion {
+  background: #111113;
+  border: 1px solid #2c2c32;
+  color: #e4e4e7;
+  border-radius: 15px;
+  padding: 17px;
+  text-align: left;
+}
+
+.suggestion:hover {
+  background: #19191e;
+  border-color: #666675;
+  transform: translateY(-2px);
+}
+
+.suggestion .emoji {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.suggestion strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.suggestion small {
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 11px;
+}
+
+/* CHAT */
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 5px 0 25px;
+}
+
+.message {
+  max-width: 88%;
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: #242429;
+  border: 1px solid #33333a;
+  padding: 12px 16px;
+  border-radius: 18px 18px 5px 18px;
+  white-space: pre-wrap;
+}
+
+.message.aria {
+  align-self: flex-start;
+  color: #dedee5;
+  white-space: pre-wrap;
+}
+
+.message-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #a78bfa;
+  margin-bottom: 7px;
+}
+
+/* CAIXA DE TEXTO */
+
+.composer {
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(transparent, var(--bg) 16%);
+  padding: 20px 0 12px;
+}
+
+.input-box {
+  background: #151517;
+  border: 1px solid #38383f;
+  border-radius: 19px;
+  padding: 13px;
+  box-shadow: 0 12px 40px #0004;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.input-box:focus-within {
+  border-color: #777787;
+  box-shadow: 0 0 0 3px #a78bfa0c;
+}
+
+#prompt {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  max-height: 150px;
+  resize: vertical;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  padding: 8px 7px;
+  font-size: 14px;
+}
+
+#prompt::placeholder {
+  color: #777780;
+}
+
+.input-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 9px;
+}
+
+.action-group {
+  display: flex;
+  gap: 7px;
+}
+
+.action-btn {
+  border: 1px solid #34343b;
+  background: #202024;
+  color: #d4d4dc;
+  border-radius: 10px;
+  min-width: 39px;
+  height: 38px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.action-btn:hover {
+  background: #303036;
+  border-color: #5b5b68;
+}
+
+.send-btn {
+  height: 39px;
+  width: 43px;
+  border: none;
+  border-radius: 12px;
+  background: #f4f4f5;
+  color: #111113;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.send-btn:hover {
+  background: #d4d4d8;
+  transform: translateY(-1px);
+}
+
+.send-btn:active {
+  transform: scale(.96);
+}
+
+.disclaimer {
+  text-align: center;
+  font-size: 10px;
+  line-height: 1.7;
+  color: #71717a;
+  padding: 10px 0;
+}
+
+@media (max-width: 700px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .topbar {
+    height: 55px;
+    padding: 0 17px;
+  }
+
+  .content {
+    padding: 28px 17px 15px;
+  }
+
+  .welcome {
+    margin: 20px 0 28px;
+  }
+
+  .suggestions {
+    gap: 8px;
+  }
+
+  .suggestion {
+    padding: 13px;
+  }
+
+  .message {
+    max-width: 95%;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="orb"></div>
-  <h1>Olá, eu sou ARIA.</h1>
-  <p>Sua casa digital está funcionando!</p>
+<div class="app">
 
-  <input id="mensagem" placeholder="Digite uma mensagem">
-  <br>
-  <button onclick="responder()">Enviar</button>
-  <button onclick="falar()">Testar minha voz</button>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">✳</div>
+      <strong>ARIA</strong>
+    </div>
 
-  <p id="resposta">Aguardando sua mensagem...</p>
+    <button class="new-chat" id="newChat">
+      <span>＋</span> Nova conversa
+    </button>
 
-  <script>
-    function responder() {
-      const mensagem = document.getElementById("mensagem").value.trim();
+    <div>
+      <div class="menu-label">ESPAÇO</div>
 
-      if (!mensagem) {
-        document.getElementById("resposta").textContent =
-          "Digite alguma coisa primeiro!";
-        return;
-      }
+      <button class="nav-btn active" id="homeBtn">
+        <span class="nav-icon">⌂</span> Início
+      </button>
 
-      document.getElementById("resposta").textContent =
-        "Recebi sua mensagem: " + mensagem +
-        ". Ainda preciso conectar meu cérebro de inteligência artificial!";
-    }
+      <button class="nav-btn" id="voiceMenu">
+        <span class="nav-icon">♫</span> Voz da ARIA
+      </button>
 
-    function falar() {
-      if (!("speechSynthesis" in window)) {
-        document.getElementById("resposta").textContent =
-          "A voz não está disponível neste navegador.";
-        return;
-      }
+      <button class="nav-btn" id="toolsMenu">
+        <span class="nav-icon">▦</span> Ferramentas
+      </button>
+    </div>
 
-      const voz = new SpeechSynthesisUtterance(
-        "Olá! Eu sou a ARIA. Minha casa digital está funcionando."
-      );
+    <div>
+      <div class="menu-label">ATALHOS</div>
 
-      voz.lang = "pt-BR";
-      speechSynthesis.speak(voz);
-    }
-  </script>
+      <button class="nav-btn" data-url="https://www.google.com">
+        <span class="nav-icon">⌕</span> Pesquisa Google
+      </button>
+
+      <button class="nav-btn" data-url="https://www.youtube.com">
+        <span class="nav-icon">▷</span> YouTube
+      </button>
+
+      <button class="nav-btn" data-url="https://github.com">
+        <span class="nav-icon">⌘</span> Meu GitHub
+      </button>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="profile">
+        <div class="avatar">✦</div>
+        <div>
+          <strong>ARIA Assistant</strong>
+          <small>Versão experimental</small>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="page-title">ARIA <span style="color:#777780">/ Assistente</span></div>
+      <div class="status">
+        <span class="status-dot"></span>
+        Interface ativa
+      </div>
+    </header>
+
+    <section class="content">
+      <div class="welcome" id="welcome">
+        <div class="orb">✳</div>
+        <h1>Como posso <span class="gradient">ajudar?</span></h1>
+        <p>
+          Olá! Eu sou a ARIA. Esta é minha casa digital.
+          Escolha uma sugestão ou comece escrevendo uma mensagem.
+        </p>
+      </div>
+
+      <div class="suggestions" id="suggestions">
+        <button class="suggestion" data-prompt="Me ajude a aprender programação.">
+          <span class="emoji">⌘</span>
+          <strong>Aprender programação</strong>
+          <small>Comece a criar seus próprios projetos.</small>
+        </button>
+
+        <button class="suggestion" data-prompt="Me dê ideias para criar um jogo.">
+          <span class="emoji">◇</span>
+          <strong>Criar um jogo</strong>
+          <small>Transforme uma ideia em um projeto.</small>
+        </button>
+
+        <button class="suggestion" data-prompt="Como funciona a inteligência artificial?">
+          <span class="emoji">✳</span>
+          <strong>Explorar IA</strong>
+          <small>Entenda como funciona a inteligência artificial.</small>
+        </button>
+
+        <button class="suggestion" data-prompt="Quais ferramentas posso usar no navegador?">
+          <span class="emoji">▦</span>
+          <strong>Descobrir ferramentas</strong>
+          <small>Encontre recursos para trabalhar na web.</small>
+        </button>
+      </div>
+
+      <div class="messages" id="messages" aria-live="polite"></div>
+
+      <form class="composer" id="chatForm">
+        <div class="input-box">
+          <textarea id="prompt" rows="1" maxlength="2000"
+            placeholder="Pergunte alguma coisa à ARIA..."
+            aria-label="Mensagem para ARIA"></textarea>
+
+          <div class="input-actions">
+            <div class="action-group">
+              <button class="action-btn" type="button" id="voiceBtn"
+                title="Testar reconhecimento de voz">🎙 Voz</button>
+              <button class="action-btn" type="button" id="speakBtn"
+                title="Testar voz falada">♫ Falar</button>
+            </div>
+            <button class="send-btn" type="submit" title="Enviar mensagem">↑</button>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          A ARIA está em desenvolvimento. O chat ainda não está conectado a uma IA real.
+          Evite inserir informações pessoais.
+        </div>
+      </form>
+    </section>
+  </main>
+</div>
+
+<script>
+const promptBox = document.getElementById("prompt");
+const messages = document.getElementById("messages");
+const welcome = document.getElementById("welcome");
+const suggestions = document.getElementById("suggestions");
+
+function addMessage(text, who) {
+  const item = document.createElement("div");
+  item.className = "message " + who;
+
+  if (who === "aria") {
+    const label = document.createElement("div");
+    label.className = "message-label";
+    label.textContent = "✳ ARIA";
+    item.appendChild(label);
+  }
+
+  const content = document.createElement("div");
+  content.textContent = text;
+  item.appendChild(content);
+
+  messages.appendChild(item);
+  item.scrollIntoView({ behavior: "smooth", block: "end" });
+}
+
+function sendMessage(text) {
+  text = (text || "").trim();
+  if (!text) return;
+
+  welcome.style.display = "none";
+  suggestions.style.display = "none";
+
+  addMessage(text, "user");
+  promptBox.value = "";
+
+  addMessage(
+    "Recebi sua mensagem! Minha interface está funcionando, mas ainda preciso conectar um serviço de inteligência artificial para entender perguntas e criar respostas reais. Essa é a próxima etapa do projeto.",
+    "aria"
+  );
+}
+
+document.getElementById("chatForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  sendMessage(promptBox.value);
+});
+
+document.querySelectorAll("[data-prompt]").forEach(button => {
+  button.addEventListener("click", () => sendMessage(button.dataset.prompt));
+});
+
+document.getElementById("newChat").addEventListener("click", () => {
+  messages.replaceChildren();
+  welcome.style.display = "";
+  suggestions.style.display = "";
+  promptBox.value = "";
+  promptBox.focus();
+});
+
+document.getElementById("homeBtn").addEventListener("click", () => {
+  welcome.style.display = "";
+  suggestions.style.display = "";
+  promptBox.focus();
+});
+
+function speak(text) {
+  if (!("speechSynthesis" in window)) {
+    addMessage("A voz falada não está disponível neste navegador.", "aria");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "pt-BR";
+  utterance.rate = 1;
+  speechSynthesis.speak(utterance);
+}
+
+document.getElementById("speakBtn").addEventListener("click", () => {
+  speak("Olá! Eu sou a ARIA. Estou pronta para continuar sendo desenvolvida.");
+});
+
+document.getElementById("voiceMenu").addEventListener("click", () => {
+  speak("Olá! Este é o teste de voz da ARIA.");
+});
+
+document.getElementById("toolsMenu").addEventListener("click", () => {
+  addMessage("Use os atalhos na barra lateral para abrir o Google, YouTube ou GitHub.", "aria");
+});
+
+const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+document.getElementById("voiceBtn").addEventListener("click", () => {
+  if (!Recognition) {
+    addMessage("O reconhecimento de voz não está disponível neste navegador ou pode estar bloqueado pela administração escolar.", "aria");
+    return;
+  }
+
+  const recognition = new Recognition();
+  recognition.lang = "pt-BR";
+  recognition.interimResults = false;
+
+  recognition.onresult = event => {
+    promptBox.value = event.results[0][0].transcript;
+    promptBox.focus();
+  };
+
+  recognition.onerror = () => {
+    addMessage("Não consegui acessar o microfone. Confira as permissões disponíveis no Chrome.", "aria");
+  };
+
+  try {
+    recognition.start();
+  } catch (error) {
+    addMessage("Não foi possível iniciar o microfone neste contexto.", "aria");
+  }
+});
+
+document.querySelectorAll("[data-url]").forEach(button => {
+  button.addEventListener("click", () => {
+    window.open(button.dataset.url, "_blank", "noopener,noreferrer");
+  });
+});
+</script>
 </body>
 </html>
 ```
