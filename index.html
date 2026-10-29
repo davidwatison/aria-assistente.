@@ -1,0 +1,113 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARIA — Assistente Virtual</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #080b16;
+      color: #eaf7ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #5ee7ff;
+      font-size: 3rem;
+    }
+
+    .orb {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, white, #5ee7ff, #7149bd, #11172a);
+      box-shadow: 0 0 45px #5ee7ff80;
+      animation: flutuar 3s infinite ease-in-out;
+    }
+
+    button {
+      margin: 8px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 10px;
+      background: #5ee7ff;
+      color: #080b16;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input {
+      width: min(300px, 90%);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #5ee7ff;
+      background: #11172a;
+      color: white;
+    }
+
+    #resposta {
+      max-width: 500px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    @keyframes flutuar {
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb"></div>
+  <h1>Olá, eu sou ARIA.</h1>
+  <p>Sua casa digital está funcionando!</p>
+
+  <input id="mensagem" placeholder="Digite uma mensagem">
+  <br>
+  <button onclick="responder()">Enviar</button>
+  <button onclick="falar()">Testar minha voz</button>
+
+  <p id="resposta">Aguardando sua mensagem...</p>
+
+  <script>
+    function responder() {
+      const mensagem = document.getElementById("mensagem").value.trim();
+
+      if (!mensagem) {
+        document.getElementById("resposta").textContent =
+          "Digite alguma coisa primeiro!";
+        return;
+      }
+
+      document.getElementById("resposta").textContent =
+        "Recebi sua mensagem: " + mensagem +
+        ". Ainda preciso conectar meu cérebro de inteligência artificial!";
+    }
+
+    function falar() {
+      if (!("speechSynthesis" in window)) {
+        document.getElementById("resposta").textContent =
+          "A voz não está disponível neste navegador.";
+        return;
+      }
+
+      const voz = new SpeechSynthesisUtterance(
+        "Olá! Eu sou a ARIA. Minha casa digital está funcionando."
+      );
+
+      voz.lang = "pt-BR";
+      speechSynthesis.speak(voz);
+    }
+  </script>
+</body>
+</html>
+```
