@@ -19,9 +19,7 @@
   --danger: #ff7185;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -32,13 +30,8 @@ body {
   overflow: hidden;
 }
 
-button, input, textarea {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
 
 button:focus-visible,
 input:focus-visible,
@@ -84,10 +77,7 @@ textarea:focus-visible {
   box-shadow: 0 0 24px rgba(103,232,249,.08);
 }
 
-.logo svg {
-  width: 38px;
-  height: 38px;
-}
+.logo svg { width: 38px; height: 38px; }
 
 .brand-name {
   font-size: 23px;
@@ -139,9 +129,7 @@ textarea:focus-visible {
   font-size: 13px;
 }
 
-.search-box::placeholder {
-  color: #7d849b;
-}
+.search-box::placeholder { color: #7d849b; }
 
 .history-list {
   flex: 1;
@@ -265,9 +253,7 @@ textarea:focus-visible {
   gap: 12px;
 }
 
-.menu-button {
-  display: none;
-}
+.menu-button { display: none; }
 
 .page-title {
   font-weight: 650;
@@ -458,9 +444,7 @@ textarea:focus-visible {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.message.user {
-  flex-direction: row-reverse;
-}
+.message.user { flex-direction: row-reverse; }
 
 .avatar {
   width: 34px;
@@ -519,9 +503,7 @@ textarea:focus-visible {
   font-size: 11px;
 }
 
-.message-actions button:hover {
-  color: var(--cyan);
-}
+.message-actions button:hover { color: var(--cyan); }
 
 .typing {
   color: var(--muted);
@@ -570,9 +552,7 @@ textarea:focus-visible {
   font-size: 14px;
 }
 
-#messageInput::placeholder {
-  color: #7e879f;
-}
+#messageInput::placeholder { color: #7e879f; }
 
 .composer-bottom {
   display: flex;
@@ -610,29 +590,32 @@ textarea:focus-visible {
   transition: .2s;
 }
 
-.send-button:hover {
-  filter: brightness(1.12);
-  transform: translateY(-1px);
-}
+.send-button:hover { filter: brightness(1.12); }
 
 .send-button:disabled {
-  opacity: .45;
-  cursor: not-allowed;
+  opacity: .55;
+  cursor: wait;
 }
 
 .disclaimer {
   text-align: center;
   color: #737b92;
   font-size: 10px;
-  margin-top: 11px;
+  margin-top: 9px;
 }
 
-/* LINKS */
+/* FERRAMENTAS */
 
 .tools-panel {
   display: none;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--border);
+  position: absolute;
+  top: 58px;
+  right: 22px;
+  z-index: 6;
+  background: #111521;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
 }
 
 .tools-panel.open {
@@ -651,13 +634,9 @@ textarea:focus-visible {
   font-size: 12px;
 }
 
-.tool-link:hover {
-  border-color: var(--cyan);
-}
+.tool-link:hover { border-color: var(--cyan); }
 
-.mobile-overlay {
-  display: none;
-}
+.mobile-overlay { display: none; }
 
 /* RESPONSIVO */
 
@@ -671,9 +650,7 @@ textarea:focus-visible {
     box-shadow: 20px 0 50px rgba(0,0,0,.35);
   }
 
-  .sidebar.open {
-    transform: translateX(0);
-  }
+  .sidebar.open { transform: translateX(0); }
 
   .mobile-overlay.open {
     display: block;
@@ -683,53 +660,25 @@ textarea:focus-visible {
     background: rgba(0,0,0,.6);
   }
 
-  .menu-button {
-    display: grid;
-  }
+  .menu-button { display: grid; }
 
   .topbar {
     padding: 0 14px;
     height: 60px;
   }
 
-  .content {
-    padding: 22px 15px;
-  }
+  .content { padding: 22px 15px; }
 
-  .composer-area {
-    padding: 8px 12px 13px;
-  }
+  .composer-area { padding: 8px 12px 13px; }
 
-  .suggestions {
-    grid-template-columns: 1fr;
-  }
+  .suggestions { grid-template-columns: 1fr; }
 
-  .orb-wrap {
-    width: 115px;
-    height: 115px;
-  }
-
-  .orb {
-    width: 108px;
-    height: 108px;
-  }
-
-  .orb svg {
-    width: 94px;
-    height: 94px;
-  }
-
-  .welcome {
-    padding: 25px 0;
-  }
-
-  .status {
-    font-size: 10px;
-  }
-
-  .message-body {
-    max-width: 86%;
-  }
+  .orb-wrap { width: 115px; height: 115px; }
+  .orb { width: 108px; height: 108px; }
+  .orb svg { width: 94px; height: 94px; }
+  .welcome { padding: 25px 0; }
+  .status { font-size: 10px; }
+  .message-body { max-width: 86%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -758,35 +707,24 @@ textarea:focus-visible {
               <stop offset="100%" stop-color="#8b5cf6"/>
             </radialGradient>
           </defs>
-          <ellipse cx="50" cy="50" rx="42" ry="17"
-            fill="none" stroke="#22d3ee" stroke-width="3"
-            transform="rotate(-35 50 50)"/>
-          <ellipse cx="50" cy="50" rx="42" ry="17"
-            fill="none" stroke="#a78bfa" stroke-width="3"
-            transform="rotate(35 50 50)"/>
-          <circle cx="50" cy="50" r="17" fill="url(#ariaLogoCore)"/>
-          <circle cx="50" cy="50" r="22"
-            fill="none" stroke="#818cf8" stroke-width="1.5" opacity=".7"/>
+          <ellipse cx="50" cy="50" rx="42" ry="17" fill="none" stroke="#67e8f9" stroke-width="2" transform="rotate(35 50 50)"/>
+          <ellipse cx="50" cy="50" rx="42" ry="17" fill="none" stroke="#a78bfa" stroke-width="2" transform="rotate(-35 50 50)"/>
+          <circle cx="50" cy="50" r="12" fill="url(#ariaLogoCore)"/>
         </svg>
       </div>
       <div>
         <div class="brand-name">ARIA</div>
-        <div class="brand-sub">ASSISTENTE DIGITAL</div>
+        <div class="brand-sub">Assistente inteligente</div>
       </div>
     </div>
 
-    <button class="new-chat" id="newChatButton">
+    <button class="new-chat" id="newChatButton" type="button">
       <span>＋</span> Nova conversa
     </button>
 
-    <div class="section-label">Histórico de conversas</div>
-
-    <input
-      class="search-box"
-      id="historySearch"
-      type="search"
-      placeholder="⌕  Pesquisar conversas..."
-      aria-label="Pesquisar histórico">
+    <div class="section-label">Histórico</div>
+    <input class="search-box" id="historySearch" type="search"
+      placeholder="Pesquisar conversas..." aria-label="Pesquisar conversas">
 
     <div class="history-list" id="historyList"></div>
 
@@ -794,8 +732,8 @@ textarea:focus-visible {
       <div class="profile">
         <div class="profile-icon">✧</div>
         <div>
-          <div class="profile-title">ARIA Assistant</div>
-          <div class="profile-sub">Protótipo local · Versão 2.0</div>
+          <div class="profile-title">ARIA 2.0</div>
+          <div class="profile-sub">Assistente virtual</div>
         </div>
       </div>
     </div>
@@ -805,24 +743,23 @@ textarea:focus-visible {
     <header class="topbar">
       <div class="topbar-left">
         <button class="icon-button menu-button" id="menuButton"
-          aria-label="Abrir menu">☰</button>
+          type="button" aria-label="Abrir menu">☰</button>
         <div class="page-title" id="pageTitle">Nova conversa</div>
       </div>
 
       <div class="topbar-right">
         <div class="status">
           <span class="status-dot"></span>
-          <span>Modo demonstração</span>
+          <span>ARIA conectável</span>
         </div>
         <button class="icon-button" id="toolsButton"
-          title="Atalhos" aria-label="Mostrar atalhos">⌘</button>
+          type="button" aria-label="Abrir ferramentas">⚙</button>
       </div>
     </header>
 
     <div class="tools-panel" id="toolsPanel">
-      <a class="tool-link" href="https://www.google.com" target="_blank" rel="noopener noreferrer">Google ↗</a>
-      <a class="tool-link" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
-      <a class="tool-link" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      <a class="tool-link" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <a class="tool-link" href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a>
     </div>
 
     <section class="content" id="content">
@@ -832,33 +769,25 @@ textarea:focus-visible {
           <div class="orb-wrap">
             <div class="orb-glow"></div>
             <div class="orb">
-              <svg viewBox="0 0 100 100" aria-label="Núcleo de energia ARIA">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
                 <defs>
-                  <radialGradient id="ariaHeroCore">
-                    <stop offset="0%" stop-color="#fff"/>
-                    <stop offset="35%" stop-color="#67e8f9"/>
-                    <stop offset="72%" stop-color="#818cf8"/>
+                  <radialGradient id="ariaCore">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="30%" stop-color="#67e8f9"/>
+                    <stop offset="70%" stop-color="#818cf8"/>
                     <stop offset="100%" stop-color="#8b5cf6"/>
                   </radialGradient>
                 </defs>
-                <ellipse cx="50" cy="50" rx="42" ry="17"
-                  fill="none" stroke="#22d3ee" stroke-width="2.5"
-                  transform="rotate(-35 50 50)"/>
-                <ellipse cx="50" cy="50" rx="42" ry="17"
-                  fill="none" stroke="#a78bfa" stroke-width="2.5"
-                  transform="rotate(35 50 50)"/>
-                <circle cx="50" cy="50" r="17" fill="url(#ariaHeroCore)"/>
-                <circle cx="50" cy="50" r="22"
-                  fill="none" stroke="#818cf8" stroke-width="1.5" opacity=".7"/>
+                <ellipse cx="50" cy="50" rx="40" ry="16" fill="none" stroke="#67e8f9" stroke-width="1.5" transform="rotate(35 50 50)"/>
+                <ellipse cx="50" cy="50" rx="40" ry="16" fill="none" stroke="#a78bfa" stroke-width="1.5" transform="rotate(-35 50 50)"/>
+                <ellipse cx="50" cy="50" rx="18" ry="40" fill="none" stroke="#818cf8" stroke-width="1.2"/>
+                <circle cx="50" cy="50" r="10" fill="url(#ariaCore)"/>
               </svg>
             </div>
           </div>
 
           <h1>Olá, eu sou a <span class="gradient-text">ARIA</span></h1>
-          <p>
-            Sua assistente digital. Faça uma pergunta, explore uma ideia
-            ou comece um novo projeto.
-          </p>
+          <p>Uma assistente virtual criada para ajudar você a aprender, programar, planejar projetos e explorar novas ideias.</p>
 
           <div class="suggestions">
             <button class="suggestion" data-prompt="Me ajude a criar um jogo">
@@ -888,17 +817,13 @@ textarea:focus-visible {
         </div>
 
         <div class="messages" id="messages" aria-live="polite"></div>
-
       </div>
     </section>
 
     <footer class="composer-area">
       <div class="composer-inner">
         <form class="composer" id="chatForm">
-          <textarea
-            id="messageInput"
-            rows="1"
-            maxlength="5000"
+          <textarea id="messageInput" rows="1" maxlength="5000"
             placeholder="Escreva uma mensagem para a ARIA..."
             aria-label="Mensagem para ARIA"></textarea>
 
@@ -914,7 +839,7 @@ textarea:focus-visible {
           </div>
         </form>
         <div class="disclaimer">
-          ARIA 2.0 · Demonstração local. As respostas ainda não usam uma IA real.
+          ARIA 2.0 · As respostas são geradas pelo serviço de IA configurado.
         </div>
       </div>
     </footer>
@@ -953,6 +878,7 @@ textarea:focus-visible {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
       if (!Array.isArray(saved)) return [];
+
       return saved.filter(c =>
         c &&
         typeof c.id === "string" &&
@@ -967,6 +893,7 @@ textarea:focus-visible {
   function saveConversations() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations));
+
       if (activeId) {
         localStorage.setItem(ACTIVE_KEY, activeId);
       } else {
@@ -993,6 +920,7 @@ textarea:focus-visible {
 
     conversations.unshift(conversation);
     activeId = conversation.id;
+
     saveConversations();
     renderHistory();
     renderConversation();
@@ -1002,6 +930,7 @@ textarea:focus-visible {
 
   function selectConversation(id) {
     if (!conversations.some(c => c.id === id)) return;
+
     activeId = id;
     saveConversations();
     renderHistory();
@@ -1025,20 +954,12 @@ textarea:focus-visible {
       activeId = null;
     }
 
-    saveConversations();
-
     if (!activeId && conversations.length > 0) {
       activeId = conversations[0].id;
     }
 
     saveConversations();
-
-    if (!activeId) {
-      renderConversation();
-    } else {
-      renderConversation();
-    }
-
+    renderConversation();
     renderHistory();
   }
 
@@ -1060,6 +981,7 @@ textarea:focus-visible {
       empty.textContent = query
         ? "Nenhuma conversa encontrada."
         : "Suas conversas aparecerão aqui depois que você enviar uma mensagem.";
+
       historyList.appendChild(empty);
       return;
     }
@@ -1139,6 +1061,7 @@ textarea:focus-visible {
       const copy = document.createElement("button");
       copy.type = "button";
       copy.textContent = "Copiar";
+
       copy.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText(text);
@@ -1194,43 +1117,11 @@ textarea:focus-visible {
     appendMessage(role, text);
   }
 
-  function makeDemoReply(text) {
-    const value = text.toLocaleLowerCase("pt-BR");
-
-    if (/\b(oi|olá|ola|e aí|eai|bom dia|boa tarde|boa noite)\b/.test(value)) {
-      return "Olá! Sou a ARIA. ✨\n\nEsta é minha versão de demonstração. Posso mostrar a interface, manter o histórico neste navegador e ler respostas em voz alta. Para responder com inteligência artificial de verdade, ainda preciso ser conectada a um serviço de IA.";
-    }
-
-    if (value.includes("quem é você") || value.includes("quem e voce") ||
-        value.includes("quem é a aria") || value.includes("quem e a aria")) {
-      return "Sou a ARIA, uma assistente digital em desenvolvimento. ⚡\n\nMinha interface já tem histórico local, conversas separadas e suporte à síntese de voz do navegador. Meu sistema de respostas ainda é demonstrativo.";
-    }
-
-    if (value.includes("histórico") || value.includes("historico")) {
-      return "O histórico da ARIA fica na barra lateral. As conversas são guardadas no armazenamento local deste navegador. Se você limpar os dados do site ou trocar de dispositivo, poderá perder o histórico.";
-    }
-
-    if (value.includes("jogo")) {
-      return "Vamos planejar seu jogo! 🎮\n\nPodemos definir:\n1. O gênero do jogo.\n2. O personagem principal.\n3. Os inimigos e objetivos.\n4. A plataforma em que será criado.\n5. As mecânicas e os níveis.\n\nObservação: esta resposta é um exemplo programado, não uma resposta gerada por uma IA conectada.";
-    }
-
-    if (value.includes("programação") || value.includes("programacao") ||
-        value.includes("código") || value.includes("codigo")) {
-      return "Para começar a programar, recomendo aprender HTML, CSS e JavaScript. 💻\n\n• HTML: estrutura da página.\n• CSS: aparência e cores.\n• JavaScript: interatividade.\n\nEsta é uma resposta de demonstração. Quando a ARIA estiver conectada a um modelo de IA, poderá produzir explicações mais adaptadas às suas perguntas.";
-    }
-
-    if (value.includes("obrigado") || value.includes("obrigada")) {
-      return "Por nada! ✨ A ARIA continua em desenvolvimento.";
-    }
-
-    return "Recebi sua mensagem! ✨\n\nNo momento, estou funcionando em modo de demonstração: minhas respostas são exemplos programados, e ainda não tenho um modelo de IA conectado.\n\nSua mensagem foi salva no histórico local. Para transformar a ARIA em uma assistente que realmente compreende perguntas variadas, o próximo passo é integrar um serviço de inteligência artificial com segurança.";
-  }
-
   function showTyping() {
     const row = document.createElement("div");
     row.className = "typing";
     row.id = "typingIndicator";
-    row.textContent = "ARIA está preparando uma resposta de demonstração…";
+    row.textContent = "ARIA está pensando…";
     messagesElement.appendChild(row);
     scrollToBottom();
   }
@@ -1239,9 +1130,11 @@ textarea:focus-visible {
     document.getElementById("typingIndicator")?.remove();
   }
 
-  function sendMessage(text) {
+  // CONEXÃO COM A IA DA CLOUDFLARE
+
+  async function sendMessage(text) {
     const cleanText = text.trim();
-    if (!cleanText) return;
+    if (!cleanText || sendButton.disabled) return;
 
     if (!activeConversation()) {
       const conversation = {
@@ -1251,6 +1144,7 @@ textarea:focus-visible {
         updatedAt: Date.now(),
         messages: []
       };
+
       conversations.unshift(conversation);
       activeId = conversation.id;
     }
@@ -1259,17 +1153,47 @@ textarea:focus-visible {
     input.value = "";
     input.style.height = "auto";
     sendButton.disabled = true;
-
     showTyping();
 
-    replyTimer = setTimeout(() => {
+    try {
+      const response = await fetch(
+        "https://ancient-heart-7e39.00001134392126sp.workers.dev",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: cleanText
+          })
+        }
+      );
+
+      const data = await response.json();
       removeTyping();
-      addMessage("assistant", makeDemoReply(cleanText));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erro ao consultar a IA.");
+      }
+
+      addMessage(
+        "assistant",
+        data.reply || "Não recebi uma resposta da IA."
+      );
+
+    } catch (error) {
+      console.error("Erro na conexão com a ARIA:", error);
+      removeTyping();
+
+      addMessage(
+        "assistant",
+        "Não consegui me conectar à inteligência artificial. Confira se o Worker da Cloudflare está publicado e se o binding AI está configurado."
+      );
+    } finally {
       sendButton.disabled = false;
       renderHistory();
-    }, 450);
-
-    renderHistory();
+      input.focus();
+    }
   }
 
   function speakText(text) {
@@ -1293,15 +1217,16 @@ textarea:focus-visible {
     overlay.classList.remove("open");
   }
 
-  document.getElementById("newChatButton").addEventListener("click", makeConversation);
+  document.getElementById("newChatButton")
+    .addEventListener("click", makeConversation);
 
-  document.getElementById("menuButton").addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    overlay.classList.toggle("open");
-  });
+  document.getElementById("menuButton")
+    .addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      overlay.classList.toggle("open");
+    });
 
   overlay.addEventListener("click", closeSidebar);
-
   historySearch.addEventListener("input", renderHistory);
 
   document.getElementById("toolsButton").addEventListener("click", () => {
